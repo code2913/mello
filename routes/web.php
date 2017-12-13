@@ -23,6 +23,11 @@ Route::resource('admin/users', 'Rolescontroller',['names' => [
   'create' => 'users.create',
   'store' => 'users.store'
 ]]);
+// Route::resource('admin/advertise', 'Advertcontroller',['names' => [
+//   'index' => 'advert.index',
+//   'create' => 'advert.create',
+//   'store' => 'advert.store'
+// ]]);
 Route::resource('admin', 'AdminController');
-Route::resource('advert', 'Advertcontroller');
+Route::resource('ads', 'Advertcontroller');
 Route::get('{code}', ['uses' =>'VisitorController@index']);

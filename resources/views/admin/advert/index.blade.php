@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://file.myfontastic.com/da58YPMQ7U5HY8Rb6UxkNf/icons.css">
     {!! Charts::assets() !!}
 @endsection
-@section('location','Administrator')
+@section('location','Advert Management')
 @section('links')
   <nav class="side-navbar">
     <!-- Sidebar Header-->
@@ -22,42 +22,37 @@
     </div>
     <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
     <ul class="list-unstyled">
-      <li> <a href="{{ url('admin') }}"><i class="icon-home"></i>Home</a></li>
-      <li><a href="{{ route('users') }}"><i class="icon-user"></i>User Management</a></li>
-      <li><a href="#statics" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Advert Managemnet </a>
-        <ul id="statics" class="collapse list-unstyled">
-          <li><a href="#">Link Stats</a></li>
-        </ul>
-      </li>
-      <li> <a href="tables.html"> <i class="icon-grid"></i>Payment Management </a></li>
+      <li class="active"> <a href="{{ route('ads.index') }}"><i class="icon-home"></i>Home</a></li>
+      <li><a href="{{ route('ads.create') }}"><i class="icon-user"></i>Advert Management</a></li>
     </ul>
   </nav>
 @endsection
 @section('content')
-  <section class="dashboard-header">
-    <div class="container">
-      <table class="table table-striped">
-        <thead>
-          <th>Users's Email</th>
-          <th>Users's Roles</th>
-          <th>Actions</th>
-        </thead>
-        <tbody>
-          @foreach ($users as $user)
-            <tr>
-              <td>{{ $user->email }}</td>
-              <td>
-              @foreach ($user->roles as $roles)
-                {{ $roles->name }} |
-              @endforeach
-              </td>
-                <td><a href="{{ route('users.create', 'shortcode' .'='. $user->id) }}">Assing roles</a> | <a href="#">Blacklist</a></td>
-            </tr>
-          @endforeach
-
-        </tbody>
-      </table>
-    </div>
+  <section class="dashboard-counts no-padding-bottom">
+    <div class="container-fluid">
+      <div class="row has-shadow">
+        @foreach ($advert as $advert)
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-close">
+                      <div class="dropdown">
+                        <button type="button" id="closeCard" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                        <div aria-labelledby="closeCard" class="dropdown-menu has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Delete</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                      </div>
+                    </div>
+              <div class="card-header d-flex align-items-center">
+                <h3 class="h4">{{ $advert->name }}</h3>
+              </div>
+              <div class="card-body">
+                <p>{{ $advert->description }}</p>
+                <img src="{{ asset('advert') }}/{{ $advert->file }}" alt="image">
+                <a href="{{ route('ads.show',$advert->id ) }}">preview ad</a>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+      </div>
   </section>
 @endsection
 @section('js')
