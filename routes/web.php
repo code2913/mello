@@ -30,4 +30,5 @@ Route::resource('admin/users', 'Rolescontroller',['names' => [
 // ]]);
 Route::resource('admin', 'AdminController');
 Route::resource('ads', 'Advertcontroller');
+Route::resource('campaign', 'CampaignController');
 Route::get('{code}', ['uses' =>'VisitorController@index']);

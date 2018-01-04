@@ -65,7 +65,8 @@ class Advertcontroller extends Controller
   */
   public function show($id)
   {
-    //
+    $advert = Advert::findOrFail($id);
+    return view('advert.preview')->with(compact('advert'));
   }
 
   /**
