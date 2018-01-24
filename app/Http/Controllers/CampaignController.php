@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Advert;
 
 class CampaignController extends Controller
 {
@@ -23,7 +24,9 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        return view('campaign.create');
+      // check if your ads are available;
+      $advert = Advert::get();
+        return view('campaign.create')->with(compact('advert'));
     }
 
     /**
