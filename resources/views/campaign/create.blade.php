@@ -47,7 +47,7 @@
         <hr/>
       </div>
       <div class="row bg-white has-shadow">
-        {{ Form::open(array("class"=>"form-horizontal","role"=>"form")) }}
+        {{ Form::open(array("class"=>"form-horizontal","role"=>"form","route"=>"campaign.store")) }}
         <div class="form-group">
           <label for="demo2" class="col-md-6 control-label">Campaing Name</label>
           <input id="demo2" type="text" name="name" class="col-md-8 form-control">
@@ -66,7 +66,7 @@
         </div>
         <div class="form-group">
           <label for="demo2" class="col-md-6 control-label">Choose Advert</label>
-          <select name="account" class="form-control">
+          <select name="advert" class="form-control">
           @foreach ($advert as $advert)
             <option value="{{$advert->id}}">{{ $advert->name }}</option>
           @endforeach

@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use  Validator;
+use  Auth;
 use App\Advert;
 
 class Advertcontroller extends Controller
 {
+  public function __construct(){
+    $this->middleware('auth');
+  }
   /**
   * Display a listing of the resource.
   *
@@ -52,6 +56,7 @@ class Advertcontroller extends Controller
         $advert->name = $request->title;
         $advert->description = $request->description;
         $advert->file = $imageName;
+        $advert->user_id = Auth::id();
         $advert->save();
 
       }

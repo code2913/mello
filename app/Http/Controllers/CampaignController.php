@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Advert;
+use  Auth;
+use Carbon\Carbon;
+
+use App\Campaign;
+
 
 class CampaignController extends Controller
 {
+  public function __construct(){
+    $this->middleware('auth');
+  }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,8 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        return view('campaign.index');
+      $advert = Campaign::where('user_id',Auth::id())->get();
+        return view('campaign.index')->with(compact('advert'));
     }
 
     /**
@@ -33,11 +42,22 @@ class CampaignController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+      Carbon::parse($request->start),
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+      $campaign = New Campaign;
+      $campaign->name = $request->name;
+      $campaign->budget = $request->budget;
+      $campaign->start_date = Carbon::parse($request->start);
+      $campaign->end_date = Carbon::parse($request->end);
+      $campaign->user_id = Auth::id();
+      $campaign->advert_id = $request->advert;
+      $campaign->timestamps = false;
+      $campaign->save();
+
+
     }
 
     /**

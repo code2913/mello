@@ -32,6 +32,31 @@
     </ul>
   </nav>
 @endsection
+@section('content')
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Campaign Name</th>
+            <th>Budget</th>
+            <th>Starting Date</th>
+            <th>End Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach ($advert as $advert)
+          <tr>
+            <td>{{ $advert->name }}</td>
+            <td>{{ $advert->budget }}</td>
+            <td>{{ $advert->start_date }}</td>
+            <td>{{ $advert->end_date }}</td>
+          </tr>
+            @endforeach
+        </tbody>
+      </table>
+    </div>
+@endsection
 
 @section('js')
   <!-- Javascript files-->

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use App\Link;
+use App\Campaign;
 
 class VisitorController extends Controller
 {
@@ -14,6 +15,7 @@ class VisitorController extends Controller
       $ip = \Request::ip();
       $visitor = geoip()->getLocation(\Request::ip());
       $link = Link::where('code',$code)->first();
+      $ad = Campaign::with('Advert')->inRandomOrder()->first();
       $link->visitors()->create([
                     'visitor' => $visitor->ip,
                     'location' => $visitor->city,
@@ -24,6 +26,6 @@ class VisitorController extends Controller
                 ]);
 
 
-      return view('advert')->with(compact('link'));
+      return view('advert')->with(compact('link','ad'));
     }
 }
